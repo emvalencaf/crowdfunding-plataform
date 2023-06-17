@@ -5,6 +5,9 @@ import {
     createContext,
 } from 'react';
 
+// custom hooks
+import { useGetCampaigns, useGetUserCampaigns, usePublishCampaign } from '../../hooks';
+
 // thirdweb hooks
 import {
     useAddress,
@@ -20,7 +23,6 @@ import {
 
 // toast
 import { toast } from 'react-hot-toast';
-import { usePublishCampaign } from '../../hooks';
 
 // context
 export const StateCampaignContext = createContext();
@@ -32,7 +34,7 @@ const StateCampaignContextProvider = ({ children }) => {
     const {
         contract
     } = useContract('0x4D10Ca8989c16513e81eF0c1892Af2842759E1BD');
-    
+
     // owner wallet address
     const address = useAddress();
     console.log(address);
@@ -42,13 +44,19 @@ const StateCampaignContextProvider = ({ children }) => {
 
     const publishCampaign = usePublishCampaign(contract);
 
+    const getCampaigns = useGetCampaigns(contract);
+
+    const getUserCampaigns = useGetUserCampaigns(address, contract);
+
     return (
         <StateCampaignContext.Provider
             value={{
                 address,
                 contract,
                 createCampaign: publishCampaign,
+                getCampaigns,
                 connect,
+                getUserCampaigns,
             }}
         >
             {children}
