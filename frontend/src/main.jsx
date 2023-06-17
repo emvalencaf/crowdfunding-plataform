@@ -11,8 +11,13 @@ import App from "./App";
 // thirdweb tools
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
+// providers
+import { StateCampaignContextProvider } from "./contexts";
+import { Toaster } from 'react-hot-toast';
+
 // styles
 import "./styles/index.css";
+
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -24,8 +29,12 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ThirdwebProvider desiredChainId={ChainId.Goerli} activeChain={activeChain}>
+      <Toaster />
       <Router>
-        <App />
+        <StateCampaignContextProvider>
+
+          <App />
+        </StateCampaignContextProvider>
       </Router>
     </ThirdwebProvider>
   </React.StrictMode>
