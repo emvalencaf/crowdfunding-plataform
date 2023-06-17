@@ -15,7 +15,7 @@ import { money } from "../../../../assets";
 import { ethers } from "ethers";
 
 // utils
-import { checkImageUrl } from '../../../../utils';
+import { checkImageUrl, separateCategories } from '../../../../utils';
 
 // toast
 import { toast } from "react-hot-toast";
@@ -34,6 +34,7 @@ const CreateCampaignContent = () => {
         target: '',
         deadline: '',
         image: '',
+        category: '',
     });
 
 
@@ -53,20 +54,28 @@ const CreateCampaignContent = () => {
     // handler submit events
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         try {
             // validation
             if (!form.name) throw new Error('must inform an author name');
-            
+
             if (!form.title) throw new Error('must inform a title for your campaign');
-            
+
             if (!form.description) throw new Error('must inform a campaign description');
-            
+
             if (!form.target) throw new Error('must set a end goal for your campaign');
-            
+
+            if (!form.target <= 0) throw new Error('must set a valid goal for your campaign');
+
             if (!form.deadline) throw new Error('must inform a end date for your campaign');
 
             if (!form.image) throw new Error('must fill a cover image url for your campaign cover');
+
+            if (!form.category) throw new Error('must tag a category to your campaing');
+
+            const categories = separateCategories(form.category);
+
+            if (categories.length > 3) throw new Error('each campaign must not exceed more than 3 categories');
 
             // check if image url exists
             checkImageUrl(form.image, async (exists) => {
@@ -79,11 +88,18 @@ const CreateCampaignContent = () => {
                 }
 
                 setIsLoading(true);
-                
+
                 await createCampaign({
                     ...form,
-                    target: ethers.utils.parseUnits(form.target, 18)
+                    target: ethers.utils.parseUnits(form.target, 18),
+                    category: categories,
                 });
+
+                console.log({
+                    ...form,
+                    target: ethers.utils.parseUnits(form.target,18),
+                    category: categories,
+                })
 
                 setIsLoading(false);
                 toast.success('campaign successfully created');
@@ -220,14 +236,30 @@ const CreateCampaignContent = () => {
                         handleChange={handleFormFieldChange}
                     />
                 </div>
-                <FormField
-                    labelName="Fill the image's url of your cover's project"
-                    placeholder="ex: http://www.mypictures.com/my-dream-project.jpeg"
-                    name="image"
-                    type="url"
-                    value={form.image}
-                    handleChange={handleFormFieldChange}
-                />
+                <div
+                    className="
+                    flex
+                    flex-wrap
+                    gap-[40px]
+                    "
+                >
+                    <FormField
+                        labelName="Fill the image's url of your cover's project *"
+                        placeholder="ex: http://www.mypictures.com/my-dream-project.jpeg"
+                        name="image"
+                        type="url"
+                        value={form.image}
+                        handleChange={handleFormFieldChange}
+                    />
+                    <FormField
+                        labelName={"Inform your campany category *"}
+                        placeholder="ex: Education, Game, (separate each category by a comma)"
+                        name="category"
+                        type="text"
+                        value={form.category}
+                        handleChange={handleFormFieldChange}
+                    />
+                </div>
                 <div
                     className="
                     flex

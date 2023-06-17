@@ -1,7 +1,13 @@
-// components
+// hooks
 import { useNavigate } from "react-router-dom";
+
+// custom hooks
 import { useStateCampaign } from "../../hooks";
+
+// custom components
 import CreateCampaignContent from "./components/CreateCampaignContent";
+
+// toast
 import { toast } from "react-hot-toast";
 
 const CreateCampaign = () => {
