@@ -12,6 +12,7 @@ contract CrowdFunding {
         string image;
         address[] donators;
         uint256[] donations;
+        string[] category;
     }
 
     mapping(uint256 => Campaign) public campaigns;
@@ -25,8 +26,10 @@ contract CrowdFunding {
         string memory _description,
         uint256 _target,
         uint256 _deadline,
-        string memory _image
+        string memory _image,
+        string[] memory _category
     ) public returns (uint256) {
+
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
         // is everything okay?
@@ -44,6 +47,7 @@ contract CrowdFunding {
         campaign.deadlin = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
+        campaign.category = _category;
 
         // increase number of campaigns
         numberOfCampaigns++;
