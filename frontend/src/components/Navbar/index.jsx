@@ -1,12 +1,14 @@
 // hooks
 import { useState } from "react";
 
+// custom hooks
+import { useStateCampaign } from "../../hooks";
+
 // React Router Dom tools
 import {
     Link,
     useNavigate
 } from 'react-router-dom';
-
 
 // custom components
 import {
@@ -19,6 +21,7 @@ import { logo, menu, search, thirdweb } from '../../assets';
 // constants
 import { navlinks } from "../../constants";
 
+
 const Navbar = () => {
     const navigate = useNavigate();
 
@@ -26,7 +29,7 @@ const Navbar = () => {
 
     const [toggleDrawer, setToggleDrawer] = useState(false);
 
-    const address = "sadsad";
+    const { connect, address } = useStateCampaign();
 
     return (
         <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
