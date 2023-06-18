@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 // custom hooks
-import { useDonate, useGetCampaigns, useGetUserCampaigns, useGetDonations, usePublishCampaign } from '../../hooks';
+import { useDonate, useGetCampaigns, useGetUserCampaigns, useGetDonations, usePublishCampaign, useSearchCampaigns } from '../../hooks';
 
 // thirdweb hooks
 import {
@@ -40,6 +40,8 @@ const StateCampaignContextProvider = ({ children }) => {
 
     const getUserCampaigns = useGetUserCampaigns(address, contract);
 
+    const getSearchedCampaigns = useSearchCampaigns(contract);
+
     const donate = useDonate(contract);
 
     const getDonations = useGetDonations(contract);
@@ -56,6 +58,7 @@ const StateCampaignContextProvider = ({ children }) => {
                 donate,
                 getDonations,
                 disconnect,
+                getSearchedCampaigns,
             }}
         >
             {children}

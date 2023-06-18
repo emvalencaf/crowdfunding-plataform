@@ -12,6 +12,7 @@ import {
   CreateCampaign,
   Home,
   Profile,
+  Search,
 } from './pages';
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-campaign" element={<CreateCampaign />} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
 
       </div>

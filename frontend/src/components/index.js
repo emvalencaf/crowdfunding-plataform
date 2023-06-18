@@ -6,4 +6,5 @@ export { default as FormField } from './FormField';
 export { default as FundCard } from './FundCard';
 export { default as Loader } from './Loader';
 export { default as Navbar } from './Navbar';
+export { default as Searchbar } from './Searchbar';
 export { default as Sidebar } from './Sidebar';

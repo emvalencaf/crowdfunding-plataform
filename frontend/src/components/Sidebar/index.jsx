@@ -38,8 +38,8 @@ const Sidebar = () => {
 
     // it will activate the icon according with the pathname
     useEffect(() => {
-        console.log(pathname);
-        const activeName = pathname === "/" ? "dashboard" : pathname === '/create-campaign' || pathname.match(/campaign-details/g) ? "campaign" : pathname.replace('/', '').trimStart();
+        
+        const activeName = pathname === "/"  || pathname.match(/search/g) ? "dashboard"  : pathname === '/create-campaign' || pathname.match(/campaign-details/g) ? "campaign" : pathname.replace('/', '').trimStart();
         setIsLoading(true);
         setIsActive(activeName);
         setIsLoading(false);

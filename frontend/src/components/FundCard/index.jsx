@@ -15,8 +15,9 @@ const FundCard = ({
     categories,
     handleClick,
 }) => {
+    
     const remainingDays = daysLeft(deadline);
-    console.log(deadline);
+
     return (
         <div
             className='
