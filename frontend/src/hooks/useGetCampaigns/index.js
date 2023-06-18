@@ -23,4 +23,4 @@ const useGetCampaigns = (contract) => {
     return getCampaigns;
 };
 
-export default useGetCampaigns();
+export default useGetCampaigns;
