@@ -6,14 +6,14 @@ import {
 } from 'react';
 
 // custom hooks
-import { useGetCampaigns, useGetUserCampaigns, usePublishCampaign } from '../../hooks';
+import { useDonate, useGetCampaigns, useGetUserCampaigns, useGetDonations, usePublishCampaign } from '../../hooks';
 
 // thirdweb hooks
 import {
     useAddress,
     useContract,
     useMetamask,
-    useContractWrite,
+    useDisconnect,
 } from '@thirdweb-dev/react';
 
 // ethers
@@ -37,16 +37,20 @@ const StateCampaignContextProvider = ({ children }) => {
 
     // owner wallet address
     const address = useAddress();
-    console.log(address);
-
 
     const connect = useMetamask();
+
+    const disconnect = useDisconnect();
 
     const publishCampaign = usePublishCampaign(contract);
 
     const getCampaigns = useGetCampaigns(contract);
 
     const getUserCampaigns = useGetUserCampaigns(address, contract);
+
+    const donate = useDonate();
+
+    const getDonations = useGetDonations();
 
     return (
         <StateCampaignContext.Provider
@@ -57,6 +61,9 @@ const StateCampaignContextProvider = ({ children }) => {
                 getCampaigns,
                 connect,
                 getUserCampaigns,
+                donate,
+                getDonations,
+                disconnect,
             }}
         >
             {children}

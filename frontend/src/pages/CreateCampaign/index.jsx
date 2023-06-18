@@ -9,6 +9,7 @@ import CreateCampaignContent from "./components/CreateCampaignContent";
 
 // toast
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 
 const CreateCampaign = () => {
     // navigate controller
@@ -19,10 +20,13 @@ const CreateCampaign = () => {
         address,
     } = useStateCampaign();
 
-    if (!address) {
-        toast.error('you must be connected to publish a campaign');
-        return navigate('/');
-    };
+    useEffect(() => {
+        if (!address) {
+            toast.error('you must be connected to publish a campaign');
+            return navigate('/');
+        };
+
+    }, [address]);
 
     return (
         <div
