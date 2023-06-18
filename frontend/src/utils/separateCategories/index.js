@@ -1,9 +1,9 @@
-const separateCategories = (categoryStr) => {
-    const categories = categoryStr.match(/,/g) ? (
-        categoryStr
+const separateCategories = (categoriesStr) => {
+    const categories = categoriesStr.match(/,/g) ? (
+        categoriesStr
             .split(",")
-            .map((category) => category.trim())
-    ) : [categoryStr];
+            .map((categories) => categories.trim())
+    ) : [categoriesStr];
 
     categories.forEach((category) => {
         if (category.length > 15) throw new Error('category tag cannot be greater than 15 characters');

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useStateCampaign } from "../../../../hooks";
 
 // custom components
-import { FormField, CustomButton } from "../../../../components";
+import { FormField, CustomButton, Loader } from "../../../../components";
 
 // assets
 import { money } from "../../../../assets";
@@ -34,7 +34,7 @@ const CreateCampaignContent = () => {
         target: '',
         deadline: '',
         image: '',
-        category: '',
+        categories: '',
     });
 
 
@@ -63,19 +63,19 @@ const CreateCampaignContent = () => {
 
             if (!form.description) throw new Error('must inform a campaign description');
 
-            if (!form.target) throw new Error('must set a end goal for your campaign');
-
-            if (!form.target <= 0) throw new Error('must set a valid goal for your campaign');
+            if (!form.target) throw new Error('must set an end goal for your campaign');
+        
+            if (Number(form.target) && Number(form.target) <= 0) throw new Error('must set a valid goal for your campaign');
 
             if (!form.deadline) throw new Error('must inform a end date for your campaign');
 
             if (!form.image) throw new Error('must fill a cover image url for your campaign cover');
 
-            if (!form.category) throw new Error('must tag a category to your campaing');
+            if (!form.categories) throw new Error('must tag a categories to your campaing');
 
-            const categories = separateCategories(form.category);
+            const _categories = separateCategories(form.categories);
 
-            if (categories.length > 3) throw new Error('each campaign must not exceed more than 3 categories');
+            if (_categories.length > 3) throw new Error('each campaign must not exceed more than 3 categories');
 
             // check if image url exists
             checkImageUrl(form.image, async (exists) => {
@@ -88,18 +88,13 @@ const CreateCampaignContent = () => {
                 }
 
                 setIsLoading(true);
-
+                console.log("loading create campaign...");
+                console.log(createCampaign);
                 await createCampaign({
                     ...form,
                     target: ethers.utils.parseUnits(form.target, 18),
-                    category: categories,
+                    categories: _categories,
                 });
-
-                console.log({
-                    ...form,
-                    target: ethers.utils.parseUnits(form.target,18),
-                    category: categories,
-                })
 
                 setIsLoading(false);
                 toast.success('campaign successfully created');
@@ -108,15 +103,16 @@ const CreateCampaignContent = () => {
 
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
             toast.error(error.message);
-        }
+        } 
 
     }
 
     return (
         <>
             {
-                isLoading && 'Loader...'
+                isLoading && <Loader />
 
             }
             <div
@@ -252,11 +248,11 @@ const CreateCampaignContent = () => {
                         handleChange={handleFormFieldChange}
                     />
                     <FormField
-                        labelName={"Inform your campany category *"}
+                        labelName={"Inform your campaign categories *"}
                         placeholder="ex: Education, Game, (separate each category by a comma)"
-                        name="category"
+                        name="categories"
                         type="text"
-                        value={form.category}
+                        value={form.categories}
                         handleChange={handleFormFieldChange}
                     />
                 </div>
