@@ -7,7 +7,7 @@ import { useStateCampaign } from "../../hooks";
 // custom components
 import { DisplayCampaigns } from '../../components';
 import { toast } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     // controller navigate

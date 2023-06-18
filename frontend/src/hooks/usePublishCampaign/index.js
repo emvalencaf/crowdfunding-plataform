@@ -13,21 +13,19 @@ const usePublishCampaign = (contract) => {
     const address = useAddress();
 
     const publishCampaign = async (formFields) => {
-        try {
-            
-            const data = await createCampaign([
+        const data = await createCampaign({
+            args: [
                 address, // campaign wallet
                 formFields.title, // campaign title
                 formFields.description, // campaign description
                 formFields.target, // campaign endgoal
                 new Date(formFields.deadline).getTime(), // campaign deadline
                 formFields.image, // campaign cover image url
-            ]);
-    
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
+                formFields.categories, // campaign categories
+            ]
+        });
+
+        console.log(data);
 
     }
 

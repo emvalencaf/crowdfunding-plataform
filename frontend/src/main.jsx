@@ -28,7 +28,7 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <ThirdwebProvider desiredChainId={ChainId.Goerli} activeChain={activeChain}>
+    <ThirdwebProvider desiredChainId={ChainId.Goerli} activeChain="goerli">
       <Toaster />
       <Router>
         <StateCampaignContextProvider>

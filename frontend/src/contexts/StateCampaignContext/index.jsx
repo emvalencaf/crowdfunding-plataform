@@ -16,24 +16,16 @@ import {
     useDisconnect,
 } from '@thirdweb-dev/react';
 
-// ethers
-import {
-    ethers
-} from 'ethers';
-
-// toast
-import { toast } from 'react-hot-toast';
-
 // context
 export const StateCampaignContext = createContext();
 
 // provider
 const StateCampaignContextProvider = ({ children }) => {
     
-    // contract
+    // the crowdfunding contract 
     const {
-        contract
-    } = useContract('0x4D10Ca8989c16513e81eF0c1892Af2842759E1BD');
+        contract,
+    } = useContract('0xD18ECD6B84856fABa1E30C713bd9dadAc18972dc');
 
     // owner wallet address
     const address = useAddress();
@@ -48,9 +40,9 @@ const StateCampaignContextProvider = ({ children }) => {
 
     const getUserCampaigns = useGetUserCampaigns(address, contract);
 
-    const donate = useDonate();
+    const donate = useDonate(contract);
 
-    const getDonations = useGetDonations();
+    const getDonations = useGetDonations(contract);
 
     return (
         <StateCampaignContext.Provider

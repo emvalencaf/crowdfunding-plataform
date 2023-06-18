@@ -7,7 +7,7 @@ contract CrowdFunding {
         string title;
         string description;
         uint256 target;
-        uint256 deadlin;
+        uint256 deadline;
         uint256 amountCollected;
         string image;
         address[] donators;
@@ -34,7 +34,7 @@ contract CrowdFunding {
 
         // is everything okay?
         require(
-            campaign.deadlin < block.timestamp,
+            campaign.deadline < block.timestamp,
             "The deadline should be a date in the future."
         );
 
@@ -44,7 +44,7 @@ contract CrowdFunding {
         campaign.title = _title;
         campaign.description = _description;
         campaign.target = _target;
-        campaign.deadlin = _deadline;
+        campaign.deadline = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
         campaign.categories = _categories;

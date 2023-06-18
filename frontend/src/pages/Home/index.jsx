@@ -7,6 +7,9 @@ import { useStateCampaign } from "../../hooks";
 // custom components
 import { DisplayCampaigns } from '../../components';
 
+// toast
+import { toast } from "react-hot-toast";
+
 const Home = () => {
     // fetching states
     const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +33,7 @@ const Home = () => {
         } catch (error) {
             setIsError(true);
             setCampaigns([]);
-            toast('something went wrong on our system');
+            toast.error('something went wrong on our system');
         
         } finally {
             setIsLoading(false);
