@@ -78,7 +78,7 @@ const DisplayCampaigns = ({
                 }
                 
                 {
-                    !isLoading && compaigns.length > 0 && campaigns.map((campaign) => (
+                    !isLoading && campaigns.length > 0 && campaigns.map((campaign) => (
                         <FundCard
                             key={campaign.id}
                             {...campaign}

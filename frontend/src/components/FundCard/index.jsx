@@ -12,6 +12,7 @@ const FundCard = ({
     deadline,
     amountCollected,
     image,
+    categories,
     handleClick,
 }) => {
     const remainingDays = daysLeft(deadline);
@@ -50,11 +51,11 @@ const FundCard = ({
                     <p
                         className='ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] text-[#808191]'
                     >
-                        {category.map((tag) => (
+                        {categories.map((category) => (
                             <span
-                                key={tag}
+                                key={category}
                             >
-                                {tag}
+                                {category}
                             </span>
                         ))}
                     </p>
