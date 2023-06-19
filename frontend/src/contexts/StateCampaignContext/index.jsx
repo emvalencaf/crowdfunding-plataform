@@ -25,7 +25,7 @@ const StateCampaignContextProvider = ({ children }) => {
     // the crowdfunding contract 
     const {
         contract,
-    } = useContract('0xD18ECD6B84856fABa1E30C713bd9dadAc18972dc');
+    } = useContract('0xD18ECD6B84856fABa1E30C713bd9dadAc18972dc');// INSERT HERE YOUR CONTRACT'S ADDRESS
 
     // owner wallet address
     const address = useAddress();

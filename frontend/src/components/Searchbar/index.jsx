@@ -12,6 +12,8 @@ const Searchbar = () => {
     const debouncedValue = useDebounce(searchInput, 500);
 
     useEffect(() => {
+        if (!debouncedValue) return;
+
         const queryParams = new URLSearchParams();
 
         queryParams.set('q', debouncedValue);
@@ -23,9 +25,11 @@ const Searchbar = () => {
     },[debouncedValue]);
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+
         const queryParams = new URLSearchParams();
 
-        queryParams.set('q', debouncedValue);
+        queryParams.set('q', searchInput);
 
         navigate({
             pathname: '/search',
